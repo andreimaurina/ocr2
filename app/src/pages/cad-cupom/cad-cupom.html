@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Cadastro de Cupom</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form *ngIf = "cupom" #formulario="ngForm">
+    <ion-item>
+      <ion-label color="primary" floating>* Ticket</ion-label>
+      <ion-input name="ticket" [(ngModel)]="cupom.ticket" type="number" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>* Balanceiro</ion-label>
+      <ion-input name="balanceiro" [(ngModel)]="cupom.balanceiro" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>* Placa do veículo</ion-label>
+      <ion-input name="veiculo" [(ngModel)]="cupom.veiculo" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>* Peso Bruto (Kg)</ion-label>
+      <ion-input name="pesoBruto" [(ngModel)]="cupom.pesoBruto" [brmasker]="{numberAndTousand: true,thousand: '.'}" required></ion-input>
+    </ion-item>  <ion-item>
+      <ion-label color="primary" floating>* Tara (Kg)</ion-label>
+      <ion-input name="tara" [(ngModel)]="cupom.tara" [brmasker]="{numberAndTousand: true,thousand: '.'}" required></ion-input>
+    </ion-item>  <ion-item>
+      <ion-label color="primary" floating>* Peso Líquido (Kg)</ion-label>
+      <ion-input name="pesoLiquido" [(ngModel)]="cupom.pesoLiquido" [brmasker]="{numberAndTousand: true,thousand: '.'}" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>* Data de Entrada</ion-label>
+      <ion-datetime displayFormat="DD de MMMM de YYYY" name="dataEntrada" [(ngModel)]="cupom.dataEntrada" required
+        monthNames = "Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+        doneText = "Ok"
+        cancelText = "Cancelar">
+      </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>* Hora de Entrada</ion-label>
+      <ion-datetime displayFormat="HH:mm" name="horaEntrada" [(ngModel)]="cupom.horaEntrada"required
+        doneText = "Ok"
+        cancelText = "Cancelar">
+      </ion-datetime>
+    </ion-item>
+    <br>
+    <button [disabled]="!formulario.form.valid" type="submit" ion-button float-right shape="round" color="primary" expand="block" (click)="chamaGravar(cupom.id)">Gravar</button>
+    <button ion-button float-right color="danger" (click)="navCtrl.pop()">Cancelar</button>
+  </form>
+
+</ion-content>

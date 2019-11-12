@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>paginaTesteUrl</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+    <ion-item-sliding *ngFor="let teste of testes">
+      <ion-item>
+        <h2>Img: {{teste.id}}</h2><br>
+      </ion-item>
+      <ion-item-options side="left">   
+        <button ion-button (click)="processar(teste.id)">Processar</button>
+      </ion-item-options>
+    </ion-item-sliding>  
+  </ion-list>
+  
+  <!-- <ion-item>
+    <ion-label color="primary" floating>* Nome da Imagem</ion-label>
+    <ion-input name="nomeImagem" [(ngModel)]="nomeImagem"></ion-input>
+  </ion-item>
+  <button type="submit" ion-button float-right shape="round" color="primary" expand="block" (click)="executar(nomeImagem)">Executar</button>
+  <br>
+  <br>
+  <br>
+  <div>Resposta:</div> -->
+
+</ion-content>
