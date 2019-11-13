@@ -38,7 +38,7 @@ export class PaginaTesteUrlPage {
         console.log(data.teste.toString().split(","));
         this.image = data.teste.toString().split(",");
         let indiceTicket = this.image.indexOf("Ticket") +1;
-        let indicebalanceiroIni = this.image.indexOf("Balanceiro") +1;
+        let indicebalanceiroIni = this.image.indexOf("Balanceiro") +1; 
         let indicebalanceiroFim = this.image.indexOf("Bruto") -2;
         let nomeBalanceiro = "";
 
@@ -76,19 +76,28 @@ export class PaginaTesteUrlPage {
 
         let indiceTara = this.image.indexOf("Tara") +1; 
         let tara = "";
+        if ((this.image[indiceTara] == "Liquido" || this.image[indiceTara] == "Líquido") || (this.image[indiceTara + 1] == "Liquido" || this.image[indiceTara + 1] == "Líquido")){
+          indiceTara = this.image.indexOf("Bruto") +5; 
+        }  
         for(let x = indiceTara; x < indiceTara+2; x++ ){
           if(tara == ""){
             tara = this.image[x];
           }else{
             tara = tara + "." + this.image[x];
-          }
+          } 
         }
  
         let indiceVeiculo = this.image.indexOf("Veículo");
+        let veiculo = "";
         if(indiceVeiculo == -1){
           indiceVeiculo = this.image.indexOf("Veiculo") + 1; 
         }else{
           indiceVeiculo = indiceVeiculo + 1;
+        }
+        if (this.image[indiceVeiculo].length == 3){
+          veiculo = this.image[indiceVeiculo] + this.image[indiceVeiculo + 1];
+        }else{
+          veiculo = this.image[indiceVeiculo];
         }
 
         let indiceDataEntrada = this.image.indexOf("Bruto") +3;
@@ -101,7 +110,7 @@ export class PaginaTesteUrlPage {
           pesoBruto: pesoBruto,
           pesoLiquido: pesoLiquido,
           tara: tara,
-          veiculo: this.image[indiceVeiculo],
+          veiculo: veiculo,
           dataEntrada: this.image[indiceDataEntrada],
           horaEntrada: this.image[indiceHoraEntrada] 
         })
