@@ -10,6 +10,7 @@ import { CupomProvider } from '../providers/cupom/cupom';
 import { ListaCupomPage } from '../pages/lista-cupom/lista-cupom';
 import { CadCupomPage } from '../pages/cad-cupom/cad-cupom';
 import { PaginaTesteUrlPage } from '../pages/pagina-teste-url/pagina-teste-url';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PaginaTesteUrlPage } from '../pages/pagina-teste-url/pagina-teste-url';
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CupomProvider
   ]

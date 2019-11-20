@@ -3,12 +3,10 @@ import * as admin from 'firebase-admin';
 admin.initializeApp();
 
 // Cloud Vision
-// import * as vision from '@google-cloud/vision';
 const vision = require('@google-cloud/vision');
-
-// const visionClient = new vision.ImageAnnotatorClient();
 const client = new vision.ImageAnnotatorClient();
-// Dedicated bucket for cloud function invocation
+
+// Nome do bucket
 const bucketName = 'ocr-2019-bb841.appspot.com';
 
 export const imageTagger = functions.storage
@@ -18,7 +16,7 @@ export const imageTagger = functions.storage
     // File data
     const filePath = object.name || '';
 
-    // Location of saved file in bucket
+    // Localização da imagem no Cloud Storage
     const imageUri = `gs://${bucketName}/${filePath}`;
 
     const docId = filePath.split('.jpg')[0];
@@ -38,3 +36,7 @@ export const imageTagger = functions.storage
 
 
 });
+
+
+
+

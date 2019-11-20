@@ -56,7 +56,7 @@ export class PaginaTesteUrlPage {
 
         let indicePesoBruto = this.image.indexOf("Bruto") +1;
         let pesoBruto = "";
-        for(let x = indicePesoBruto; x < indicePesoBruto+2; x++ ){
+        for(let x = indicePesoBruto; x < indicePesoBruto+2; x++ ){ 
           if(pesoBruto == ""){
             pesoBruto = this.image[x];
           }else{

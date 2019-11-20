@@ -17,7 +17,7 @@ export class CadCupomPage {
     public navParams: NavParams,
     public provedor: CupomProvider
     ) {
-    this.id = this.navParams.data.id;
+    this.id = this.navParams.data.id; 
     if (!this.id) {
       this.cupom = new Cupom();
     } else {
@@ -25,10 +25,28 @@ export class CadCupomPage {
     }
   }
 
+  // chamaPorId(id){
+  //   this.provedor.listarPorId(id).then(
+  //     data => {
+  //       this.cupom = data;
+  //     }
+  //   );
+  // }
+
   chamaPorId(id){
     this.provedor.listarPorId(id).then(
       data => {
-        this.cupom = data;
+        this.cupom = ({
+          id: id,
+          ticket: data.ticket,
+          balanceiro: data.balanceiro,
+          pesoBruto: data.pesoBruto,
+          pesoLiquido: data.pesoLiquido,
+          tara: data.tara,
+          veiculo: data.veiculo,
+          dataEntrada: data.dataEntrada,
+          horaEntrada: data.horaEntrada
+        });
       }
     );
   }
@@ -41,6 +59,7 @@ export class CadCupomPage {
 }
 
 export class Cupom {
+  id: String;
   ticket: number;
   balanceiro: String;
   pesoBruto: number;
