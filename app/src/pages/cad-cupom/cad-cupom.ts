@@ -29,7 +29,7 @@ export class CadCupomPage {
   //   this.provedor.listarPorId(id).then(
   //     data => {
   //       this.cupom = data;
-  //     }
+  //     } 
   //   );
   // }
 
@@ -37,7 +37,6 @@ export class CadCupomPage {
     this.provedor.listarPorId(id).then(
       data => {
         this.cupom = ({
-          id: id,
           ticket: data.ticket,
           balanceiro: data.balanceiro,
           pesoBruto: data.pesoBruto,
@@ -59,7 +58,6 @@ export class CadCupomPage {
 }
 
 export class Cupom {
-  id: String;
   ticket: number;
   balanceiro: String;
   pesoBruto: number;
