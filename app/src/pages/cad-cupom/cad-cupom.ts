@@ -18,10 +18,14 @@ export class CadCupomPage {
     public provedor: CupomProvider
     ) {
     this.id = this.navParams.data.id; 
-    if (!this.id) {
-      this.cupom = new Cupom();
-    } else {
-      this.chamaPorId(this.id);
+    if (this.navParams.data.cup){
+      this.cupom = this.navParams.data.cup[0];
+    }else{
+      if (!this.id) {
+        this.cupom = new Cupom();
+      } else {
+        this.chamaPorId(this.id);
+      }
     }
   }
 

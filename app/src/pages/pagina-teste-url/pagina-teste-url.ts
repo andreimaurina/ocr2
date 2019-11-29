@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CupomProvider } from '../../providers/cupom/cupom';
+import { CadCupomPage } from '../cad-cupom/cad-cupom';
 
 @IonicPage()
 @Component({
@@ -35,7 +36,7 @@ export class PaginaTesteUrlPage {
   processar(id){
     this.provedor.buscarTexto(id).then(
       data => { 
-        console.log(data.teste.toString().split(","));
+        // console.log(data.teste.toString().split(","));
         this.image = data.teste.toString().split(",");
         let indiceTicket = this.image.indexOf("Ticket") +1;
         let indicebalanceiroIni = this.image.indexOf("Balanceiro") +1; 
@@ -101,20 +102,25 @@ export class PaginaTesteUrlPage {
         }
 
         let indiceDataEntrada = this.image.indexOf("Bruto") +3;
+        let dataEntrada = this.image[indiceDataEntrada].split("/")
+        let dataEntradaFinal = dataEntrada[2]+"-"+dataEntrada[1]+"-"+dataEntrada[0]
+
+
         let indiceHoraEntrada = this.image.indexOf("Bruto") +4;
 
         this.valores.push({
-          id: id,
+          // id: id,
           ticket: this.image[indiceTicket],
           balanceiro: nomeBalanceiro,
           pesoBruto: pesoBruto,
           pesoLiquido: pesoLiquido,
           tara: tara,
           veiculo: veiculo,
-          dataEntrada: this.image[indiceDataEntrada],
+          dataEntrada: dataEntradaFinal,
           horaEntrada: this.image[indiceHoraEntrada] 
-        })
-        console.log(this.valores);
+        });
+        // console.log(this.valores);
+        this.navCtrl.push(CadCupomPage,{cup: this.valores}); 
       }
     )    
   } 

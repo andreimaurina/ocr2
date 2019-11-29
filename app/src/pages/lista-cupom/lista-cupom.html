@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-searchbar placeholder="Pesquisar..."  (ionInput)="filtrarItens($event)" showCancelButton clearInput></ion-searchbar><!--ajustar função q chama pesquisar -->
+  <ion-searchbar placeholder="Pesquisar..."  (ionInput)="filtrarItens($event)" showCancelButton clearInput></ion-searchbar>
   <ion-list>
     <ion-item-sliding *ngFor="let cupom of cupons">
       <ion-item>
@@ -20,10 +20,10 @@
       </ion-item-options>
     </ion-item-sliding>  
   </ion-list>
-  <p align="center"><img src="{{foto}}"></p>
+  <!-- <p align="center"><img src="{{foto}}"></p> -->
   <ion-fab bottom right>
     <button ion-fab color="primary" (click)="testarUrl()"> 
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="build"></ion-icon>
     </button>
   </ion-fab>
   <ion-fab bottom center>

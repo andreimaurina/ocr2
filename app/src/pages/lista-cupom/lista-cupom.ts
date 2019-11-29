@@ -3,7 +3,9 @@ import { IonicPage, NavController, NavParams, AlertController, ActionSheetContro
 import { CupomProvider } from '../../providers/cupom/cupom';
 import { CadCupomPage } from '../cad-cupom/cad-cupom';
 import { PaginaTesteUrlPage } from '../pagina-teste-url/pagina-teste-url';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @IonicPage()
 @Component({
@@ -12,7 +14,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 })
 export class ListaCupomPage {
 
-  cupons=[];
+  cupons = [];
   listaPadrao = [];
   foto: any;
 
@@ -21,7 +23,9 @@ export class ListaCupomPage {
     public provedor: CupomProvider, 
     public alertCtrl: AlertController,
     private actionSheetController: ActionSheetController,
-    private camera: Camera
+    private camera: Camera,
+    private db: AngularFireDatabase, 
+    private afStorage: AngularFireStorage
     ) {
   }
   
@@ -102,17 +106,23 @@ export class ListaCupomPage {
 
   tirarFoto(){
     const options: CameraOptions = {
-      quality: 100,
+      quality: 70,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
     
     this.camera.getPicture(options).then((imageData) => {
-      this.foto = 'data:image/jpeg;base64,' + imageData;
+    
+      this.foto=(<any>window).Ionic.WebView.convertFileSrc(imageData);
+
+        // this.foto = 'data:image/jpeg;base64,' + imageData;  <=========
+      this.uploadImagem();
     }, (err) => {
      // Handle error
     });
+
+    
   }
 
   buscaGaleria(){
@@ -124,9 +134,21 @@ export class ListaCupomPage {
     }
     
     this.camera.getPicture(options).then((imageData) => {
+      // this.foto=(<any>window).Ionic.WebView.convertFileSrc(imageData);
+
       this.foto = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
      // Handle error
     });
   }
+
+  uploadImagem(){
+      let newName = `${new Date().getTime()}.jpeg`;
+   
+      return this.afStorage.ref(`files/${newName}`).putString(this.foto);
+  }
+   
+  
+  
+
 }
